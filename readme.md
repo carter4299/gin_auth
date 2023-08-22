@@ -26,7 +26,8 @@ Restrictions: Usernames must be unique
    ./load.sh
    ```
 
-   ![Screenshot Placeholder](https://i.ibb.co/h78QWLC/Screenshot-from-2023-08-22-01-52-16.png)
+   <a href="https://ibb.co/98YKTcG"><img src="https://i.ibb.co/h78QWLC/Screenshot-from-2023-08-22-01-52-16.png" 
+alt="Screenshot-from-2023-08-22-01-52-16" border="0"></a><br /><a target='_blank' href='https://poetandpoem.com/Augustus-Montague-Toplady/quotes'>augustus toplady quotes</a><br />
 
 3. During the setup, you'll be prompted for several configurations:
 
