@@ -28,6 +28,7 @@ Restrictions: Usernames must be unique
 
 
 ![Screenshot Placeholder](https://i.ibb.co/h78QWLC/Screenshot-from-2023-08-22-01-52-16.png)
+
 3. During the setup, you'll be prompted for several configurations:
 
    - **SSH Server Setup**: Decide if you'd like to set up an SSH server.
