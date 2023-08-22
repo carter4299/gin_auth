@@ -208,6 +208,18 @@ VALUES(?, ?, ?, ?, ?);
 
 ## Source Code
 
+```bash
+   cd test_api_source
+   #To install node_modules
+   npm install
+   #To Host w/ Vite (default localhost:5173)
+   npm run dev
+   #To build static
+   npm run build
+```
+
+
+
 - [Test Api](./test_api_source/src/hooks/auth_api.tsx) and [Test Functions](./test_api_source/src/hooks/auth_util.tsx.tsx) have typescript example code to format correctly to pass Cors Middleware
 
 ### Variables
