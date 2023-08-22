@@ -208,7 +208,7 @@ VALUES(?, ?, ?, ?, ?);
 
 ## Source Code
 
-- [Test Api](./test_api_source/src/hooks/auth_api.tsx) has examples of typescript code to format correctly to pass Cors Middleware
+- [Test Api](./test_api_source/src/hooks/auth_api.tsx) and [Test Functions](./test_api_source/src/hooks/auth_util.tsx.tsx) have typescript example code to format correctly to pass Cors Middleware
 
 ### Variables
 
