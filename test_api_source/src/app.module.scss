@@ -1,0 +1,36 @@
+@import './styles/media';
+@import './styles/spacing';
+@import './styles/color';
+.root {
+    min-height: 100vh;
+    background-color: $color-background;
+    position: relative; 
+}
+.header {
+    margin-bottom: $spacing-6;
+}
+@keyframes blink {
+    0%, 100% {
+        opacity: 0.2;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+
+    &:first-of-type {
+        background-color: $color-background;
+        min-height: calc(100vh - 90.5px);
+    }
+}
+
+.container:first-of-type {
+    min-height: calc(100vh - 90.5px); 
+}
+

@@ -1,0 +1,8 @@
+/node_modules/
+*.db
+*.log
+*.enc
+*.sum
+gin_auth
+*.mod
+test_api_source/dist/

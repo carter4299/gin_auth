@@ -1,0 +1,117 @@
+package middleware
+
+import (
+	"encoding/base64"
+	"io"
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+	devlogger "github.com//my_server_config"
+	session_manager "github.com//session_manager"
+)
+
+var log = devlogger.DevLogger()
+
+func InitMiddleware(r *gin.Engine) *gin.Engine {
+	r.Use(decode_base_64_middleware())
+	r.Use(check_valid_path())
+	r.Use(tokenAuthMiddleware())
+
+	return r
+}
+
+func check_valid_path() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Next()
+	}
+}
+
+func decode_base_64_middleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		if c.Request.Method == "POST" {
+			c.Request.ParseMultipartForm(10 << 20) 
+			for key, values := range c.Request.PostForm {
+				for i, value := range values {
+					decodedValue, err := base64.StdEncoding.DecodeString(value)
+					if err == nil {
+						c.Request.PostForm[key][i] = string(decodedValue)
+					}
+				}
+			}
+			if file, _, err := c.Request.FormFile("password"); err == nil {
+				bytes, err := io.ReadAll(file)
+				if err != nil {
+					c.Abort()
+					return
+				}
+
+				decodedBytes, err := base64.StdEncoding.DecodeString(string(bytes))
+				if err == nil {
+					c.Set("decoded_password", decodedBytes)
+				}
+			}
+		}
+
+		c.Next()
+	}
+}
+
+func tokenAuthMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		if c.FullPath() == "/api/go/auth/login" || c.FullPath() == "/api/go/auth/signup" {
+			c.Next()
+			return
+		}
+		cookie, err := c.Request.Cookie("auth_token")
+		if err != nil {
+			log.Error(err)
+			log.Debug(c.Request.Cookies())
+			c.JSON(http.StatusUnauthorized, "auth token required")
+			c.Abort()
+			return
+		}
+
+
+		authToken := cookie.Value
+
+		if c.FullPath() == "/api/go/other/logout" {
+			err := session_manager.RemoveSession(authToken)
+			if err != nil {
+				log.Error(err)
+				c.JSON(http.StatusInternalServerError, "Internal server error")
+				c.Abort()
+				return
+			} 
+			invalidCookie := remove_cookie()
+			c.SetCookie(invalidCookie.Name, invalidCookie.Value, invalidCookie.MaxAge, invalidCookie.Path, invalidCookie.Domain, invalidCookie.Secure, invalidCookie.HttpOnly)
+
+			c.JSON(200, gin.H{"message": "Logged out successfully"})
+			c.Abort()
+			return
+		}
+
+		isit, err := session_manager.ValidateAuthToken(authToken)
+		if err != nil || !isit {
+			c.JSON(http.StatusUnauthorized, "invalid auth token")
+			c.Abort()
+			return
+		}
+
+		c.Next()
+	}
+}
+
+func remove_cookie() http.Cookie {
+	maxAge := -1
+	cookie := http.Cookie{
+		Name:     "auth_token",
+		Value:    "",
+		MaxAge:   maxAge,
+		Path:     "/",
+		SameSite: http.SameSiteLaxMode,
+		HttpOnly: true,
+		Secure:   true,
+
+	}
+	return cookie
+}

@@ -1,0 +1,107 @@
+@import './../styles/media';
+@import './../styles/spacing';
+@import './../styles/color';
+
+.stickyHeader {
+    display: flex;
+    align-items: center;
+    padding: $spacing-2 $spacing-3;
+    background-color: $color-background;
+    color: $color-light-gray;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 1px solid $color-light-gray;
+    transition: border-color 0.3s ease-in-out;
+    &:hover {
+        border-bottom-color: $color-secondary;
+    }
+    & > .headerContainer:not(:last-child) {
+        margin-right: $spacing-15;  
+    }
+    a, h6, .dropdown { 
+        transition: color 0.3s ease-in-out;
+        &:hover {
+            color: $color-light-gray-hover;
+        }
+    }
+}
+.headerContainer {
+    display: flex;
+    align-items: center;
+    position: relative;
+    &:first-child {
+        flex-grow: 0;
+        flex-shrink: 0; 
+        cursor: pointer;
+        transition: color 0.3s ease-in-out;
+        
+        &:hover {
+            color: $color-light-gray-hover; 
+        }
+    }
+    &:nth-child(2) {
+        flex-grow: 1;
+        flex-shrink: 1; 
+        justify-content: flex-start; 
+    }
+    &:last-child {
+        flex-grow: 0;
+        flex-shrink: 0; 
+        justify-content: flex-end;
+    }
+}
+
+.smallLogo {
+    cursor: pointer;
+    width: 40px;
+    height: 40px; 
+    margin-right: $spacing-2;
+}
+.mainLogo {
+    width: 50px;
+    height: 50px; 
+    margin-right: $spacing-2;
+}
+.navLinks {
+    display: flex;
+    gap: 15px;
+}
+.dropdown {
+    user-select: none;
+    cursor: pointer; 
+    h6 {
+        display: inline;
+    }
+}
+.dropdownIcon {
+    margin-left: 5px; 
+}
+.dropdownContent {
+    display: none; 
+    position: absolute;
+    background-color: $color-background;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 0px;
+    z-index: 1;
+    a {
+        display: block; 
+        padding: 10px 16px; 
+        text-decoration: none; 
+        color: $color-light-gray;  
+        transition: color 0.3s ease-in-out;
+
+        &:hover {
+            color: $color-light-gray-hover;
+        }
+    }
+}
+.show {
+    display: block;
+}
+.authLinks {
+    display: flex;
+    gap: 15px;
+    margin-right: $spacing-2; 
+}

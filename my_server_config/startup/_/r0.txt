@@ -1,0 +1,7 @@
+package main
+
+import startup "github.com/carter4299/gin_auth/my_server_config/startup"
+
+func main() {
+	startup.InitDB()
+}

@@ -1,0 +1,2 @@
+github_username=carter4299
+github_repo=gin_auth
