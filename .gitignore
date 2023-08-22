@@ -5,4 +5,4 @@
 *.sum
 gin_auth
 *.mod
-test_api_source/dist/
+**/dist/
