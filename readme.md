@@ -26,7 +26,7 @@ Restrictions: Usernames must be unique
    ./load.sh
    ```
 
-   ![Screenshot Placeholder](path_to_screenshot.png)
+   ![Screenshot Placeholder](./test_api_source/src/assets/CLI.png)
 
 3. During the setup, you'll be prompted for several configurations:
 
