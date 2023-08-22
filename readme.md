@@ -26,7 +26,7 @@ Restrictions: Usernames must be unique
    ./load.sh
    ```
 
-   ![Screenshot Placeholder](https://i.ibb.co/h78QWLC/Screenshot-from-2023-08-22-01-52-16.png)
+   ![Screenshot Placeholder](path_to_screenshot.png)
 
 3. During the setup, you'll be prompted for several configurations:
 
