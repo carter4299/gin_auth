@@ -204,7 +204,7 @@ INSERT INTO active_auth_tokens(private_auth_token, to_all_auth_tokens, to_all_au
 VALUES(?, ?, ?, ?, ?);
 ```
 
-# Front-End Data Type Formatting
+# Front-End
 
 ## Source Code
 
