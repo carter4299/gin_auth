@@ -6,8 +6,8 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	devlogger "github.com//my_server_config"
-	session_manager "github.com//session_manager"
+	devlogger "github.com/carter4299/gin_auth/my_server_config"
+	session_manager "github.com/carter4299/gin_auth/session_manager"
 )
 
 var log = devlogger.DevLogger()

@@ -4,11 +4,10 @@ import (
 	"encoding/base64"
 	"io"
 	"net/http"
-	"strings"
 
 	"github.com/gin-gonic/gin"
-	devlogger "github.com/carter4299/gin_auth/my_server_config"
-	session_manager "github.com/carter4299/gin_auth/session_manager"
+	devlogger "github.com//my_server_config"
+	session_manager "github.com//session_manager"
 )
 
 var log = devlogger.DevLogger()
@@ -17,7 +16,7 @@ func InitMiddleware(r *gin.Engine) *gin.Engine {
 	r.Use(decode_base_64_middleware())
 	r.Use(check_valid_path())
 	r.Use(tokenAuthMiddleware())
-	r.Use(setStaticFileMimeType())
+
 	return r
 }
 
@@ -27,53 +26,10 @@ func check_valid_path() gin.HandlerFunc {
 	}
 }
 
-/*
-var ongoingRequests = make(map[string]bool)
-
-	func isRequestOngoing(hash string) bool {
-		_, exists := ongoingRequests[hash]
-		return exists
-	}
-
-	func markRequestAsOngoing(hash string) {
-		ongoingRequests[hash] = true
-	}
-
-	func unmarkRequest(hash string) {
-		delete(ongoingRequests, hash)
-	}
-
-	func check_valid_path() gin.HandlerFunc {
-		return func(c *gin.Context) {
-			c.Next()
-		}
-	}
-
-	func computeRequestHash(c *gin.Context) string {
-		body, _ := io.ReadAll(c.Request.Body)
-		c.Request.Body = io.NopCloser(bytes.NewBuffer(body))
-		return fmt.Sprintf("%s:%s:%s", c.Request.Method, c.Request.URL.Path, string(body))
-	}
-
-	func request_guard_middleware() gin.HandlerFunc {
-		return func(c *gin.Context) {
-			requestHash := computeRequestHash(c)
-
-			if isRequestOngoing(requestHash) {
-				c.AbortWithStatusJSON(http.StatusTooManyRequests, gin.H{"error": "Duplicate request"})
-				return
-			}
-
-			markRequestAsOngoing(requestHash)
-			c.Next()
-			unmarkRequest(requestHash)
-		}
-	}
-*/
 func decode_base_64_middleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		if c.Request.Method == "POST" {
-			c.Request.ParseMultipartForm(10 << 20) // size limit 1024 bytes
+			c.Request.ParseMultipartForm(10 << 20) 
 			for key, values := range c.Request.PostForm {
 				for i, value := range values {
 					decodedValue, err := base64.StdEncoding.DecodeString(value)
@@ -99,27 +55,10 @@ func decode_base_64_middleware() gin.HandlerFunc {
 		c.Next()
 	}
 }
-func setStaticFileMimeType() gin.HandlerFunc {
-    return func(c *gin.Context) {
-        if strings.HasSuffix(c.Request.URL.Path, ".js") {
-            c.Header("Content-Type", "application/javascript")
-        } else if strings.HasSuffix(c.Request.URL.Path, ".css") {
-            c.Header("Content-Type", "text/css")
-        }
-        c.Next()
-    }
-}
+
 func tokenAuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// Skip middleware for authentication route
-		if c.FullPath() == "/" ||
-			c.FullPath() == "/login" ||
-			c.FullPath() == "/signup" ||
-			c.FullPath() == "/assets/" ||
-			c.FullPath() == "/src/" ||
-			strings.HasPrefix(c.FullPath(), "/assets/") || 
-			c.FullPath() == "/api/go/auth/login" ||
-			c.FullPath() == "/api/go/auth/signup" {
+		if c.FullPath() == "/api/go/auth/login" || c.FullPath() == "/api/go/auth/signup" {
 			c.Next()
 			return
 		}
@@ -171,7 +110,7 @@ func remove_cookie() http.Cookie {
 		Path:     "/",
 		SameSite: http.SameSiteLaxMode,
 		HttpOnly: true,
-		// Secure:   true,
+		Secure:   true,
 
 	}
 	return cookie
