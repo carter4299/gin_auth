@@ -16,7 +16,7 @@ Restrictions: Usernames must be unique
 
 1. Clone the repository:
    ```bash
-   git clone https:/carter4299/gin_auth
+   git clone https://github.com/carter4299/gin_auth.git
    cd gin_auth
    ```
 
