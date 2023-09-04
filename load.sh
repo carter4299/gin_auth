@@ -24,7 +24,7 @@ log() {
 }
 
 check_dependencies() {
-    dependencies=("openssl" "yq" "go" "python3")
+    dependencies=("openssl" "go" "python3")
     
     log "Checking dependencies (openssl, yq, go, python3)..."
 
