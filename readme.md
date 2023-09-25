@@ -1,5 +1,7 @@
 # Authentication for Golang's Gin Framework
 
+Dependency installers run on debain/ubuntu. Download seperately to bypass.
+
 This project provides a basic web authentication system for the Gin framework in Golang. 
 
 If you choose to use this for your server. Change the names of variables, they were made to be readable.
