@@ -6,8 +6,6 @@ This project provides a basic web authentication system for the Gin framework in
 
 If you choose to use this for your server. Change the names of variables, they were made to be readable.
 
-I would also recommend [Hashicorp Vault](https://www.vaultproject.io/) instead of using env vars.
-
 Restrictions: Usernames must be unique
 
 ## Prerequisites
